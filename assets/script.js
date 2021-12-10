@@ -1,14 +1,14 @@
-const lowerCaseChar = "abcdefghijklmnopqrstuvwxyz";
-const upperCaseChar = lowerCaseChar.toUpperCase();
-const specialChar = "!@#$%^&*()?_-+=";
-const numberChar= "123456789";
-
 var generatorEl = document.querySelector(".card-header");
 
 var promptEl = document.createElement("div");
+
 generatorEl.appendChild(promptEl);
 
 var formEl = document.createElement("form");
+formEl.setAttribute(
+  "style",
+  "display: flex; justify-content: space-between; flex-wrap:wrap"
+);
 promptEl.appendChild(formEl);
 
 var lengthPromptEl = document.createElement("input");
@@ -58,28 +58,43 @@ formEl.appendChild(label4);
 
 // console.log(`passLength func returns: ${passLength}`);
 
+const lowerCaseChar = "abcdefghijklmnopqrstuvwxyz";
+const upperCaseChar = lowerCaseChar.toUpperCase();
+const specialChar = "!@#$%^&*()?_-+=";
+const numberChar = "123456789";
+
+
+
+
+
+
 function generatePassword() {
+  var characterString;
+  if ( numButtonEl.checked == true && loCaseButtonEl.checked == true && upCaseButtonEl.checked == true &&  specialButtonEl.checked == true ){
+    characterString = "".concat(lowerCaseChar, upperCaseChar, numberChar, specialChar);
+  } else if ( numButtonEl.checked == true && loCaseButtonEl.checked == true && upCaseButtonEl.checked == true &&  specialButtonEl.checked == false){
+      characterString = "".concat(lowerCaseChar, upperCaseChar, numberChar);
+  } else if ( numButtonEl.checked == true && loCaseButtonEl.checked == true && upCaseButtonEl.checked == false &&  specialButtonEl.checked == false){ 
+    characterString = "".concat(lowerCaseChar, upperCaseChar);
+  }
+
+
   var pass = "";
-  var characters = lowerCase;
-  var charactersLength = characters.length;
+  var charactersLength = characterString.length;
 
   var lengthPromptInput = parseInt(
     document.querySelector("input[type='text']").value
   );
 
-  if (lengthPromptInput < 8 || lengthPromptInput > 128) {
-    window.alert(
-      "invalid length. (password must be a minimum of 8 characters and a max of 128)"
-    );
+  if (lengthPromptInput < 8 || lengthPromptInput > 128 || !lengthPromptInput) {
+    alert("invalid length. (password must be a minimum of 8 characters and a max of 128)");
   } else {
-    // double checking values are correct
-    console.log(`numerical answer ${lengthPromptInput}`);
-
     for (var i = 0; i < lengthPromptInput; i++) {
-      pass += characters.charAt(Math.floor(Math.random() * charactersLength));
+      pass += characterString.charAt(Math.floor(Math.random() * charactersLength));
     }
     return pass;
   }
+
 }
 
 // Get references to the #generate element
@@ -96,4 +111,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
