@@ -1,3 +1,8 @@
+const lowerCaseChar = "abcdefghijklmnopqrstuvwxyz";
+const upperCaseChar = lowerCaseChar.toUpperCase();
+const specialChar = "!@#$%^&*()?_-+=";
+const numberChar = "123456789";
+
 var generatorEl = document.querySelector(".card-header");
 
 var promptEl = document.createElement("div");
@@ -19,7 +24,7 @@ formEl.appendChild(lengthPromptEl);
 var numButtonEl = document.createElement("input");
 numButtonEl.setAttribute("type", "checkbox");
 numButtonEl.setAttribute("name", "num");
-numButtonEl.setAttribute("id", "num");
+numButtonEl.setAttribute("value", numberChar);
 var label1 = document.createElement("label");
 label1.setAttribute("for", "num");
 label1.innerHTML = "numbers";
@@ -29,7 +34,7 @@ formEl.appendChild(label1);
 var loCaseButtonEl = document.createElement("input");
 loCaseButtonEl.setAttribute("type", "checkbox");
 loCaseButtonEl.setAttribute("name", "lo");
-loCaseButtonEl.setAttribute("id", "lo");
+loCaseButtonEl.setAttribute("value", lowerCaseChar);
 var label2 = document.createElement("label");
 label2.setAttribute("for", "lo");
 label2.innerHTML = "lowercase";
@@ -39,7 +44,7 @@ formEl.appendChild(label2);
 var upCaseButtonEl = document.createElement("input");
 upCaseButtonEl.setAttribute("type", "checkbox");
 upCaseButtonEl.setAttribute("name", "up");
-upCaseButtonEl.setAttribute("id", "up");
+upCaseButtonEl.setAttribute("value", upperCaseChar);
 var label3 = document.createElement("label");
 label3.setAttribute("for", "up");
 label3.innerHTML = "uppercase";
@@ -49,33 +54,25 @@ formEl.appendChild(label3);
 var specialButtonEl = document.createElement("input");
 specialButtonEl.setAttribute("type", "checkbox");
 specialButtonEl.setAttribute("name", "special");
-specialButtonEl.setAttribute("id", "special");
+specialButtonEl.setAttribute("value", specialChar);
 var label4 = document.createElement("label");
 label4.setAttribute("for", "special");
 label4.innerHTML = "special";
 formEl.appendChild(specialButtonEl);
 formEl.appendChild(label4);
 
-// console.log(`passLength func returns: ${passLength}`);
-
-const lowerCaseChar = "abcdefghijklmnopqrstuvwxyz";
-const upperCaseChar = lowerCaseChar.toUpperCase();
-const specialChar = "!@#$%^&*()?_-+=";
-const numberChar = "123456789";
-
-
-
-
 
 
 function generatePassword() {
-  var characterString;
-  if ( numButtonEl.checked == true && loCaseButtonEl.checked == true && upCaseButtonEl.checked == true &&  specialButtonEl.checked == true ){
-    characterString = "".concat(lowerCaseChar, upperCaseChar, numberChar, specialChar);
-  } else if ( numButtonEl.checked == true && loCaseButtonEl.checked == true && upCaseButtonEl.checked == true &&  specialButtonEl.checked == false){
-      characterString = "".concat(lowerCaseChar, upperCaseChar, numberChar);
-  } else if ( numButtonEl.checked == true && loCaseButtonEl.checked == true && upCaseButtonEl.checked == false &&  specialButtonEl.checked == false){ 
-    characterString = "".concat(lowerCaseChar, upperCaseChar);
+
+  var stringChars = document.forms[0];
+  var characterString = "";
+  var i;
+
+  for (i=0;i<stringChars.length; i++){
+    if(stringChars[i].checked){
+      characterString = characterString+stringChars[i].value;
+    }
   }
 
 
