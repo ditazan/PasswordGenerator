@@ -1,6 +1,7 @@
-const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-const upperCase = lowerCase.toUpperCase();
+const lowerCaseChar = "abcdefghijklmnopqrstuvwxyz";
+const upperCaseChar = lowerCaseChar.toUpperCase();
 const specialChar = "!@#$%^&*()?_-+=";
+const numberChar= "123456789";
 
 var generatorEl = document.querySelector(".card-header");
 
